@@ -7,11 +7,16 @@ int parImpar(int);
 long factorial(long n);
 double mediaAritmetica(double x, double y, double z, double w);
 int desplazar(int n, int nPos);
+void operacionesLogicasBits();
+int ponerACeroBit(int n, int nPosBit);
+int numeroBits(int n);
+int potencia(int numero, int elevado);
+int cambiarBits(int x, int y,int z); 
+void intercambiar(double *a, double *b);
 
 int menu();// declaración de la función"menu"
 int main(){
 
-    // DEFINICIONES DE VARIABLES
     int opcion;// opción elegida del menú
     printf("PRÁCTICA2\n");
     printf("==========\n");
@@ -44,12 +49,19 @@ int main(){
 
         case 3:
             printf("Ejercicio3: operaciones logicasyanivel de bits\n");
-            // Llamarala función"operaciones LogicasBits"
+            operacionesLogicasBits();
             break;
 
         case 4:
-            printf("Ejercicio4:poneracero un bit\n");
-            // Llamarala función"ponerACeroBit"
+            printf("Ejercicio4:poner a cero un bit\n");
+            int n, nPosBit;
+            printf("Introduzca un número: ");
+            scanf("%d", &n);
+            printf("Posicion del bit a poner a cero: ");
+            scanf("%d", &nPosBit);
+            int resul;
+            resul = ponerACeroBit(n,  nPosBit);
+            printf("El numero modificado es %d\n",resul);
             break;
 
         case 5:
@@ -71,17 +83,43 @@ int main(){
 
         case 6:
             printf("Ejercicio6:número de bits\n");
-            // Llamarala función"numeroBits"
+            int numbits;
+            do{ 
+                printf("Introduce un número ");
+                scanf("%d", &numbits);
+            }while(numbits<=0);
+            int resulbits;
+            resulbits = numeroBits(numbits);
+            printf("El numero de bits para representar %d es %d\n",numbits,resulbits);
             break;
 
         case 7:
             printf("Ejercicio7:cambiar bits\n");
-            // Llamarala función"cambiarBits"
+            int numcbits;
+            do{ 
+                printf("Introduce un número ");
+                scanf("%d", &numcbits);
+            }while(numcbits<=0);
+            printf("Posicion del bit inicial a invertir ");
+            int intialpos;
+            scanf("%d",&intialpos);
+            printf("Numero de bits a invertir ");
+            int numbitsinvert;
+            scanf("%d",&numbitsinvert);
+            int resultados = cambiarBits(numcbits,intialpos,numbitsinvert);
+            resultados == -1 ? printf("El número de bits no es valido\n") : printf("El número modificado es: %d\n",resultados);
             break;
 
         case 8:
             printf("Ejercicio8:intercambiar\n");
-            // Llamarala función"intercambiar"
+            double aa,bb;
+            printf("Introduce el primer valor: ");
+            scanf("%lf",&aa);
+            printf("Introduce el segundo valor: ");
+            scanf("%lf",&bb);
+            intercambiar(&aa, &bb);
+            printf("Los valores intercambiados son 1-%lf y 2-%lf\n",aa,bb);
+
             break;
 
         case 9:
@@ -108,6 +146,7 @@ int main(){
 }
 
 // DEFINICIONES DE FUNCIONES
+
 int menu()// definición de la función"menu"
 {
     int op;
@@ -168,4 +207,75 @@ int desplazar(int n, int nPos){
     int nDesplazado = 0;
     nDesplazado =  n >> nPos;
     return nDesplazado;
+}
+
+void operacionesLogicasBits(){
+
+    int a = 8, b = 0, c = 15, d = 93, e, r1, r2, r3, r4, r5, r6;
+
+    r1 = a && b || c && !d; //r1 = False
+    r2 = !a || b && c || d; //r2 = True
+    r3 = a < b || !c > d; //r3 = False
+    r4 = a + b > d - c; //r4 = False
+    r5 = a && b && !c || !(a && b) && c; //r5 = True
+
+    a = 0x12; b = 0x56; c = 0x9a ; d = 0x0f ; e = 0360;
+
+    r1 = a & b | c; //r1 = 154
+    r2 = c & 0177; //r2 = 26
+    r3 = ~a | b ^ c; //r3 = -155
+    r4 = e & c; //r4 = 144
+    r5 = r4 & ~077; //r5 = 0
+    r6 = (a & d) << 4 | (a & e) >> 4; //r6 = 33
+
+}
+
+int ponerACeroBit(int n, int nPosBit){
+    int resultado = 0, mascara;
+    mascara = 1 << nPosBit;
+    resultado = n ^ mascara;
+    return resultado;
+}
+
+int numeroBits(int n){
+    
+    int i = 1;
+    int dosElevadoN = potencia(2,i);
+
+    for(i=2;dosElevadoN <= n;i++){
+        dosElevadoN = potencia(2,i);
+    } 
+    return i-1;
+}
+
+int potencia(int numero, int elevado){
+    int copia=numero;
+    for(int i=1;i<elevado;i++){
+        numero = numero*copia;
+    }
+    return numero;
+}
+
+int cambiarBits(int x, int y,int z){
+    int pos = y-2;
+    int comp = z+(pos);
+    int tam = numeroBits(x);
+    if(tam<comp){
+        return -1;
+    }
+    else{
+        int xcop = x;
+        for(int i=0;i<z;i++){
+            xcop = xcop ^ (1<<pos);
+            pos++;
+        }
+        return xcop;
+    }
+
+}
+
+void intercambiar(double *a, double *b){
+    int tmp=*a;
+    *a=*b;
+    *b=tmp;
 }
