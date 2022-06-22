@@ -10,8 +10,29 @@ void ErrorMemoria(tCadena cadena, char *pcadena)
   exit(-1);
 }
 
-void VisuCadena( tCadena cadena){}
+void VisuCadena(tCadena cadena){
 
-// void VisuContacto(tContacto contacto);
+  printf("Numero de tiendas: %d\n",cadena.n_tiendas);
+  VisuContacto(cadena.contacto);
+  VisuTienda(cadena.p_tiendas);
+  printf("\n");
+}
+
+void VisuContacto(tContacto contacto){
+
+  printf("Direccion: %s\n",contacto.direccion);
+  printf("Telefono: %s\n",contacto.tfno);
+  printf("Email: %s\n",contacto.e_mail);
+
+}
+
+void VisuTienda(tTienda *tienda){  
+
+  printf("Codigo: %d\n",tienda->codigo);
+  printf("Numero de prendas: %d\n",tienda->n_prendas);
+  // VisuContacto(tienda.contacto);
+  printf("\n");
+
+}
+
 // void VisuPrenda(tPrenda prenda);
-// void VisuTienda(tTienda tienda);

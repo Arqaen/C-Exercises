@@ -50,19 +50,18 @@ typedef struct
 int Menu();
 
 void LeeCadena(char cadena[], char *p_mensaje, int max);
-tContacto LeerContacto();
+void LeerContacto(tContacto *p_contacto);
 int CrearTiendas(tCadena *p_cadena);
 int IniTienda(tTienda *pTienda);
 int IniTiendas(tTienda *p_tiendas, int n_tiendas);
-tPrenda IniPrenda();
 void IniPrendasUnaTienda(tPrenda *p_prendas, int n_prendas);
-void IniPrendasTiendas(tCadena cadena);
+void IniPrenda(tPrenda *p_prendas);
 int AnyadirTienda(tCadena *p_cadena);
 
 void VisuContacto(tContacto contacto);
 void VisuPrenda(tPrenda prenda);
-void VisuTienda(tTienda tienda);
-void VisuCadena( tCadena cadena);
+void VisuTienda(tTienda *tienda);
+void VisuCadena(tCadena cadena);
 void ErrorMemoria(tCadena cadena, char *pcadena);
 
 void EliminaPrenda(tPrenda *pp_prendas, int posPrenda, int n_prendas);

@@ -59,7 +59,6 @@ int Menu()
    int op;
    do
    {
-      // system("cls");
       printf("\n\n");
       printf("\t1. Crear array de tiendas\n");
       printf("\t2. Inicializar tiendas y prendas\n");
